@@ -4,11 +4,11 @@ import Collection from 'mongodb/lib/collection';
 import envLoader from './env_loader';
 
 /**
- * Represents a MongoDB client
+ * Represents a MongoDB client.
  */
 class DBClient {
     /**
-     * Creates a new DBClient instance
+     * Creates a new DBClient instance.
      */
     constructor() {
         envLoader();
@@ -17,7 +17,7 @@ class DBClient {
         const database = process.env.DB_DATABASE || 'files_manager';
         const dbURL = `mongodb://${host}:${port}/${database}`;
 
-        this.client = new mongodb.MongoClient(dbURL, { useUnifieldTopology: true });
+        this.client = new mongodb.MongoClient(dbURL, { useUnifiedTopology: true });
         this.client.connect();
     }
 
@@ -34,28 +34,28 @@ class DBClient {
      * @returns {Promise<Number>}
      */
     async nbUsers() {
-        return this.; this.client.db().collection('user').countDocument();
+        return this.client.db().collection('users').countDocuments();
     }
 
     /**
-     * Retrieves a reference to the 'users' collection
+     * Retrieves the number of files in the database.
      * @returns {Promise<Number>}
      */
     async nbFiles() {
-        return this.client.db().collection('files').countDocument();
+        return this.client.db().collection('files').countDocuments();
     }
 
     /**
-     * Retrieves a reference to the 'users' collections
-     * @returns {Promise<Number>}
+     * Retrieves a reference to the `users` collection.
+     * @returns {Promise<Collection>}
      */
-    async userCollection() {
+    async usersCollection() {
         return this.client.db().collection('users');
     }
 
     /**
-     * Retrieves a reference to the 'files' collection
-     * @returns {Promise<Number>}
+     * Retrieves a reference to the `files` collection.
+     * @returns {Promise<Collection>}
      */
     async filesCollection() {
         return this.client.db().collection('files');
