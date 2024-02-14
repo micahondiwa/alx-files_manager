@@ -1,1 +1,2 @@
-# Ignore
+.eslintrc.js
+node_modules
